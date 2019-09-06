@@ -1,0 +1,23 @@
+.app {
+  text-align: center;
+
+  .logo-text {
+    font-size: 1.5rem;
+
+    .p1 {
+      font-weight: 500;
+      color: white;
+      background-color: green;
+    }
+
+    .p2 {
+      font-weight: 900;
+      color: crimson;
+      background-color: transparent;
+    }
+  }
+
+  .line-end {
+    text-align: right;
+  }
+}
