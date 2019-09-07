@@ -1,19 +1,24 @@
 .app {
-  text-align: center;
+  text-align: left;
 
   .logo-text {
-    font-size: 1.5rem;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
 
-    .p1 {
-      font-weight: 500;
-      color: white;
-      background-color: green;
+    &::before {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700;
+      color: darkgray;
+      content: 'TooMuch';
     }
 
-    .p2 {
+    &::after {
       font-weight: 900;
-      color: crimson;
+      color: darkorange;
       background-color: transparent;
+      content: '// TODO :';
     }
   }
 

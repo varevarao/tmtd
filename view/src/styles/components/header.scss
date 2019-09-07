@@ -1,37 +1,71 @@
+@import '../mixins.scss';
+
+$height-header: 95vh;
+$width-header: 40vw;
+$width-header-md: 20vw;
+
 .header {
     background-color: white !important;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 2px 2px 5px darkgray;
+    
+    padding: 1rem;
+    padding-left: 2rem;
 
-    .header-start {
-        flex: 1;
+    height: $height-header;
+    width: $width-header;
 
-        font-family: 'Open Sans', sans-serif;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
+    // Overrides
+    @include from('md') {
+        width: $width-header-md;
     }
+
+    position: fixed;
+    top: 0;
+
+    // width - padding-left - padding-right
+    left: calc((-1 * #{$width-header}) - 2rem - 1rem);
+    transition: left .1s linear;
+
+    // width - padding-left
+    &.ready {
+        left: calc((-1 * #{$width-header}) - 2rem);
+    }
+
+    &.active {
+        left: 0px;
+    }
+
+    display: flex;
+    flex-direction: column;
 
     .header-end {
         flex: 1;
 
         display: flex;
-        align-items: center;
-        justify-content: flex-end;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
 
         .user-name {
-            margin-right: 15px;
             cursor: default;
         }
     }
 
     .user-actions {
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        text-align: left;
+
         .action {
             font-weight: 700;
-            margin-right: 15px;
-
-            :first-child {
-                margin-right: 5px;
-                margin-left: 5px;
-            }
+            padding: 0;
         }
 
         .user-register {
@@ -46,9 +80,8 @@
         .user-logout {
             font-weight: 300;
             font-size: 0.75rem;
-            margin-left: 2rem;
 
-            color: crimson;
+            color: firebrick;
         }
 
         .new-product {

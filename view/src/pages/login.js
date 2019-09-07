@@ -1,6 +1,7 @@
-import { Card, CardContent, FormControl, Input, InputLabel, FormGroup, CardActions, Button } from '@material-ui/core';
+import { FormControl, Input, InputLabel } from '@material-ui/core';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import CredentialForm, { CREDS_TYPE } from '../components/credential-form';
 import AuthenticationService from '../services/authentication-service';
 import '../styles/pages/login.scss';
 
@@ -46,46 +47,19 @@ class Login extends Component {
         }
     }
 
-    performRedirect(path) {
-        const { history } = this.props;
-        history.push(`/${path}`);
-    }
-
     render() {
         const { error, email, password } = this.state;
         return (
-            <div className="login-container">
-                <div className="logo-text">
-                    <span className="p1">Toolo</span>
-                    <span className="p2">city</span>
-                </div>
-                <Card className="login-card">
-                    <CardContent>
-                        {!!error && <div className="login-error">{error}</div>}
-                        <FormGroup>
-                            <FormControl>
-                                <InputLabel>Email</InputLabel>
-                                <Input type="email" value={email} onChange={evt => this.setState({ email: evt.target.value })} />
-                            </FormControl>
-                            <FormControl>
-                                <InputLabel>Password</InputLabel>
-                                <Input type="password" value={password} onChange={evt => this.setState({ password: evt.target.value })} />
-                            </FormControl>
-                        </FormGroup>
-                    </CardContent>
-                    <CardActions className="login-actions">
-                        <Button onClick={this.performLogin}>
-                            Login
-                        </Button>
-                        <div className="login-switch">
-                            <span>Don't have an account?</span>
-                            <Button onClick={() => this.performRedirect('register')}>
-                                Sign Up instead
-                            </Button>
-                        </div>
-                    </CardActions>
-                </Card>
-            </div>
+            <CredentialForm error={error} type={CREDS_TYPE.LOGIN} onSubmit={this.performLogin} redirectPath='register'>
+                <FormControl>
+                    <InputLabel>Email</InputLabel>
+                    <Input type="email" value={email} onChange={evt => this.setState({ email: evt.target.value })} />
+                </FormControl>
+                <FormControl>
+                    <InputLabel>Password</InputLabel>
+                    <Input type="password" value={password} onChange={evt => this.setState({ password: evt.target.value })} />
+                </FormControl>
+            </CredentialForm>
         )
     }
 }
