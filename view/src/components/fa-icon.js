@@ -4,13 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from 'react';
 
 export const ICON_MAP = {
-    signIn: faSignInAlt,
-    signOut: faSignOutAlt,
-    signUp: faUserPlus,
-    plus: faPlus,
-    minus: faMinus,
-    close: faWindowClose,
-    spinner: faSpinner
+    'sign-in': faSignInAlt,
+    'sign-out': faSignOutAlt,
+    'sign-up': faUserPlus,
+    'plus': faPlus,
+    'minus': faMinus,
+    'close': faWindowClose,
+    'spinner': faSpinner
 }
 
 const FAIcon = ({ icon, ...rest }) => (

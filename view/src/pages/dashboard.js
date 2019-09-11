@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import DragButton from '../components/drag-button';
+import FAIcon from '../components/fa-icon';
+import { showHeader, showModal } from '../store/actions/ui';
 import '../styles/pages/dashboard.scss';
-import { showHeader } from '../store/actions/ui';
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -11,10 +13,13 @@ class Dashboard extends Component {
     }
 
     render() {
+        const { toggleModal } = this.props;
         return (
             <div className="dashboard-container">
-
-            </div>
+                <DragButton className="create-button" onClick={() => toggleModal()}>
+                    <FAIcon icon='plus' />
+                </DragButton>
+            </div >
         )
     }
 }
@@ -24,7 +29,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    toggleHeader: () => dispatch(showHeader())
+    toggleHeader: () => dispatch(showHeader()),
+    toggleModal: (type, props) => dispatch(showModal(type, props))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

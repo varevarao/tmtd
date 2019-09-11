@@ -9,7 +9,7 @@ export const PRODUCT_MODAL_TYPE = {
     NEW: 'NEW'
 }
 
-export default class ProductModal extends Component {
+export default class AppModal extends Component {
     constructor(props) {
         super(props);
 
@@ -127,7 +127,7 @@ export default class ProductModal extends Component {
         const { variant, onClose } = config || {};
 
         return !variant ? null : (
-            <Modal open={open} onClose={onClose} className="product-modal">
+            <Modal open={open} onClose={onClose} className="app-modal">
                 {
                     this.renderModalContent(variant)
                 }
