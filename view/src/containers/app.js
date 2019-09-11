@@ -7,8 +7,10 @@ import ProductModal from '../components/product-modal';
 import Pages from '../pages';
 import initializeStore from '../store/index';
 import '../styles/app.scss';
+import setupClientStores from '../store/actions';
 
 const store = initializeStore();
+setupClientStores(store);
 
 const App = () => (
   <div className="app">

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { logout } from '../store/actions/user';
 import '../styles/components/header.scss';
-import FAIcon, { ICON_MAP } from './fa-icon';
+import FAIcon from './fa-icon';
 
 export const isTouchEnabled = () => {
     try {
@@ -42,6 +42,7 @@ class Header extends Component {
         visible: true,
         ready: false,
         timer: null,
+        touchEnabled: isTouchEnabled(),
         // Keyed by a unique identifier for each touch point
         touchPoints: {}
     }
@@ -173,22 +174,26 @@ class Header extends Component {
         return setTimeout(() => this.setState({ visible: false, ready: false, timer: null }), 1000);
     }
 
-    componentDidMount() {
-        if (isTouchEnabled()) {
-            // Probably a touch enabled device.
-            // Hide header by default,
-            // enable swipe events to show header
-            this.addSwipeHandlers();
+    componentWillReceiveProps({ show }) {
+        const { touchEnabled } = this.state;
+        if (touchEnabled) {
+            if (show) {
+                // Probably a touch enabled device.
+                // Hide header by default,
+                // enable swipe events to show header
+                this.addSwipeHandlers();
 
-            // Show the header for a second, and hide
-            this.setState({ timer: this.startReadyTimer() });
-        } else {
-            // By default the header is visible
+                // Show the header for a second, and hide
+                this.setState({ timer: this.startReadyTimer() });
+            } else {
+                this.addSwipeHandlers(true);
+            }
         }
     }
 
     componentWillUnmount() {
-        if (isTouchEnabled) {
+        const { touchEnabled } = this.state;
+        if (touchEnabled) {
             this.addSwipeHandlers(true);
         }
     }
@@ -209,14 +214,14 @@ class Header extends Component {
                 <div className="user-actions">
                     {!!!user &&
                         <Button className={`action user-register`} variant="contained" onClick={() => this.handleProfileAction('register')}>
-                            <FAIcon icon={ICON_MAP.signUp} />
+                            <FAIcon icon='sign-up' />
                             <Hidden smDown>
                                 sign up
                                     </Hidden>
                         </Button>
                     }
                     <Button className={`action user-${!!!user ? 'login' : 'logout'}`} variant="text" onClick={() => this.handleProfileAction(!!user ? 'logout' : 'login')}>
-                        <FAIcon icon={!!user ? ICON_MAP.signOut : ICON_MAP.signIn} />
+                        <FAIcon icon={!!user ? 'sign-out' : 'sign-in'} />
                         {!!user ? 'sign out' : 'Login'}
                     </Button>
                 </div>

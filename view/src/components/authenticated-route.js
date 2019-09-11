@@ -18,7 +18,7 @@ class AuthenticatedRoute extends Component {
 }
 
 const mapStateToProps = ({ user }) => ({
-    authed: !!user.profile
+    authed: user.authenticated
 })
 
 export default connect(mapStateToProps)(AuthenticatedRoute);

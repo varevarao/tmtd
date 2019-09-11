@@ -16,6 +16,8 @@ export const ui = {
 };
 
 export const user = {
+    AUTH: 'USER:AUTH',
+    
     LOGIN: 'USER:LOGIN',
     LOGOUT: 'USER:LOGOUT',
     

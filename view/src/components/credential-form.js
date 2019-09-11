@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import '../styles/components/credential-form.scss';
+import FAIcon from './fa-icon';
 
 export const CREDS_TYPE = {
     LOGIN: 'LOGIN',
-    SIGNUP: 'SIGN UP'
+    SIGNUP: 'SIGNUP'
 };
 
 class CredentialForm extends Component {
@@ -33,7 +34,7 @@ class CredentialForm extends Component {
     }
 
     render() {
-        const { children, error, type, onSubmit, redirectPath, onRedirect } = this.props;
+        const { children, error, type, loading, onSubmit, redirectPath, onRedirect } = this.props;
         const { toggled } = this.state;
 
         return (
@@ -47,8 +48,10 @@ class CredentialForm extends Component {
                         </FormGroup>
                     </CardContent>
                     <CardActions className="creds-actions">
-                        <Button onClick={onSubmit}>
-                            {type}
+                        <Button onClick={onSubmit} disabled={loading}>
+                            {
+                                loading ? <FAIcon icon='spinner' spin style={{ height: '1.75rem' }} /> : type
+                            }
                         </Button>
                         <div className="creds-switch">
                             <span>{type === CREDS_TYPE.SIGNUP ? 'Already have' : 'Do not have'} an account?</span>

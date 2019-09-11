@@ -1,12 +1,18 @@
 import { user as actionTypes } from '../actions/actionTypes';
 
 const initialState = {
+    authenticated: false,
     profile: null,
     meta: {}
 }
 
 export default (state = initialState, { type, payload }) => {
     switch (type) {
+        case actionTypes.AUTH:
+            return {
+                ...state,
+                authenticated: payload
+            }
         case actionTypes.LOGIN:
             return {
                 ...state,
