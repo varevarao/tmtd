@@ -1,28 +1,26 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import AuthenticatedRoute from '../components/authenticated-route';
-import Dashboard from '../pages/dashboard';
-import Login from '../pages/login';
-import NotFound from '../pages/not-found';
-import Register from '../pages/register';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Header from '../components/header';
+import Loader from '../components/loader';
+import ProductModal from '../components/product-modal';
+import Pages from '../pages';
+import initializeStore from '../store/index';
 import '../styles/app.scss';
 
-export default class App extends Component {
-  render() {
-    return (
-      <div className="app">
-        <Router>
-          <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <AuthenticatedRoute exact path="/dashboard" component={Dashboard} />
-            <AuthenticatedRoute path="/" component={Dashboard} />
-            <AuthenticatedRoute path="" component={Dashboard} />
-            {/* Default to a HTTP 404 page */}
-            <Route component={NotFound} />
-          </Switch>
-        </Router>
-      </div>
-    )
-  }
-}
+const store = initializeStore();
+
+const App = () => (
+  <div className="app">
+    <Provider store={store}>
+      <Router>
+        <Header />
+        <Pages />
+        <ProductModal />
+        <Loader />
+      </Router>
+    </Provider>
+  </div>
+)
+
+export default App;

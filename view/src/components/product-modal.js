@@ -123,7 +123,9 @@ export default class ProductModal extends Component {
     }
 
     render() {
-        const { variant, open, onClose } = this.props;
+        const { open, config } = this.props;
+        const { variant, onClose } = config || {};
+
         return !variant ? null : (
             <Modal open={open} onClose={onClose} className="product-modal">
                 {
@@ -133,3 +135,12 @@ export default class ProductModal extends Component {
         )
     }
 }
+
+const mapStateToProps = ({ ui }) => ({
+    open: !!ui.modal,
+    config: ui.modal
+})
+
+const mapDispatchToProps = dispatch => ({
+
+})

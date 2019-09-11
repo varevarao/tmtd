@@ -1,8 +1,9 @@
 import { FormControl, Input, InputLabel } from '@material-ui/core';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CredentialForm, { CREDS_TYPE } from '../components/credential-form';
-import AuthenticationService from '../services/authentication-service';
+import { login } from '../store/actions/user';
 import '../styles/pages/login.scss';
 
 class Login extends Component {
@@ -19,20 +20,22 @@ class Login extends Component {
         this.performLogin = this.performLogin.bind(this);
     }
 
-    performLogin() {
+    async performLogin() {
         const { email, password, returnPath } = this.state;
+        const { login } = this.props;
 
-        AuthenticationService.login(email, password)
-            .then(() => {
-                const { history } = this.props;
-                history.push(returnPath);
-            }).catch(error => {
-                this.setState({ error })
-            });
+        try {
+            await login(email, password);
+            
+            const { history } = this.props;
+            history.push(returnPath);
+        } catch (error) {
+            this.setState({ error })
+        };
     }
 
     componentDidMount() {
-        const loggedIn = AuthenticationService.loggedIn();
+        const { loggedIn } = this.props;
         const { location, history } = this.props;
 
         let { returnPath } = this.state;
@@ -64,4 +67,12 @@ class Login extends Component {
     }
 }
 
-export default withRouter(Login);
+const mapStateToProps = ({ user }) => ({
+    loggedIn: !!user.profile
+})
+
+const mapDispatchToProps = dispatch => ({
+    login: (email, password) => dispatch(login(email, password))
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

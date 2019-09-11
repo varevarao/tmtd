@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { Route, Redirect } from 'react-router-dom';
-import AuthenticationService from '../services/authentication-service';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect, Route } from 'react-router-dom';
 
-export default class AuthenticatedRoute extends Component {
+class AuthenticatedRoute extends Component {
     render() {
-        const { component: Component, ...rest } = this.props;
-        const authed = AuthenticationService.loggedIn();
+        const { component: Component, authed, ...rest } = this.props;
+
         return (
             <Route
                 {...rest}
@@ -16,3 +16,9 @@ export default class AuthenticatedRoute extends Component {
         )
     }
 }
+
+const mapStateToProps = ({ user }) => ({
+    authed: !!user.profile
+})
+
+export default connect(mapStateToProps)(AuthenticatedRoute);

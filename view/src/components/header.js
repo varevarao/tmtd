@@ -1,10 +1,10 @@
-import { faCartArrowDown, faPlus, faSignInAlt, faSignOutAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Hidden } from '@material-ui/core';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import AuthenticationService from '../services/authentication-service';
+import { logout } from '../store/actions/user';
 import '../styles/components/header.scss';
+import FAIcon, { ICON_MAP } from './fa-icon';
 
 export const isTouchEnabled = () => {
     try {
@@ -55,7 +55,7 @@ class Header extends Component {
     }
 
     handleProfileAction(action) {
-        const { history } = this.props;
+        const { history, userLogout } = this.props;
         switch (action) {
             case 'register':
                 history.push('/register');
@@ -64,7 +64,7 @@ class Header extends Component {
                 history.push('/login');
                 break;
             case 'logout':
-                AuthenticationService.logout();
+                userLogout();
                 history.replace('/');
                 break;
             default:
@@ -194,9 +194,9 @@ class Header extends Component {
     }
 
     render() {
-        const { user, cart, onCreate, onCheckout } = this.props;
+        const { user, show } = this.props;
         const { visible, ready } = this.state;
-        return (
+        return show ? (
             <div className={`header ${ready ? 'ready' : ''} ${visible ? 'active' : ''}`} position="sticky">
 
                 <div className="logo-text" />
@@ -207,38 +207,31 @@ class Header extends Component {
                     {!!user && <span className="user-name">{`${user.firstName} ${user.lastName}`}</span>}
                 </div>
                 <div className="user-actions">
-                    {!!user && !!onCreate &&
-                        <Button className="action new-product" variant="outlined" onClick={onCreate}>
-                            <FontAwesomeIcon icon={faPlus} />
-                            <Hidden smDown>
-                                New Listing
-                                    </Hidden>
-                        </Button>
-                    }
-                    {!!cart && cart.length > 0 && !!onCheckout &&
-                        <Button className="action user-checkout" variant="outlined" onClick={onCheckout}>
-                            <FontAwesomeIcon icon={faCartArrowDown} />
-                            <Hidden smDown>
-                                Checkout
-                                    </Hidden>
-                        </Button>
-                    }
                     {!!!user &&
                         <Button className={`action user-register`} variant="contained" onClick={() => this.handleProfileAction('register')}>
-                            <FontAwesomeIcon icon={faUserPlus} />
+                            <FAIcon icon={ICON_MAP.signUp} />
                             <Hidden smDown>
                                 sign up
                                     </Hidden>
                         </Button>
                     }
                     <Button className={`action user-${!!!user ? 'login' : 'logout'}`} variant="text" onClick={() => this.handleProfileAction(!!user ? 'logout' : 'login')}>
-                        <FontAwesomeIcon icon={!!user ? faSignOutAlt : faSignInAlt} />
+                        <FAIcon icon={!!user ? ICON_MAP.signOut : ICON_MAP.signIn} />
                         {!!user ? 'sign out' : 'Login'}
                     </Button>
                 </div>
             </div>
-        )
+        ) : null
     }
 }
 
-export default withRouter(Header);
+const mapStateToProps = ({ user, ui }) => ({
+    user: user.profile,
+    show: !!ui.header
+})
+
+const mapDispatchToProps = dispatch => ({
+    userLogout: () => dispatch(logout())
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

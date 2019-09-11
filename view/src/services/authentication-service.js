@@ -111,7 +111,7 @@ class _AuthenticationService {
             else return Promise.reject(response.statusText);
         }
 
-        return Promise.reject(JSON.stringify(err));
+        return Promise.reject(err.message);
     }
 
     _checkStatus(response) {

@@ -1,9 +1,9 @@
 {
-  "name": "toolcity",
-  "version": "0.0.0",
+  "name": "tmtd",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development DEBUG=toolcity:* node ./bin/www",
+    "dev": "NODE_ENV=development DEBUG=tmtd:* node ./bin/www",
     "build": "cd view && yarn install && NODE_ENV=production yarn build && mv build/ ../public/",
     "start": "NODE_ENV=production node ./bin/www"
   },
