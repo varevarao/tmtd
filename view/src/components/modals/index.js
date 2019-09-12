@@ -14,9 +14,9 @@ export const MODAL_TYPE = {
 }
 
 const MODAL_TYPE_MAP = {
-    CREATE_PROJECT: CreateProject,
-    CREATE_UPDATE: CreateUpdate,
-    CREATE_BILL: CreateBill,
+    CREATE_PROJECT: <CreateProject />,
+    CREATE_UPDATE: <CreateUpdate />,
+    CREATE_BILL: <CreateBill />,
 }
 
 class AppModal extends Component {
@@ -25,14 +25,11 @@ class AppModal extends Component {
 
         if (!type || !type in MODAL_TYPE_MAP) return null;
 
-        const ModalComponent = MODAL_TYPE_MAP[type];
         return (
             <Modal open={open} onClose={onClose} className="app-modal">
-                <Grid container className="modal-container" alignItems="center" justify="center">
-                    <Grid item xs={10} md={6}>
-                        <ModalComponent />
-                    </Grid>
-                </Grid>
+                <div className="modal-container">
+                    {MODAL_TYPE_MAP[type]}
+                </div>
             </Modal>
         )
     }

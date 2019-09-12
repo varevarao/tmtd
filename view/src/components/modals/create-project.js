@@ -37,7 +37,7 @@ export class CreateProject extends Component {
         const { title, group, notes, tags } = this.state;
 
         return (
-            <Card className="modal-card">
+            <Card className="modal-card create-project">
                 <CardContent>
                     <div className="form-header">
                         <span className="form-title">New Project</span>
