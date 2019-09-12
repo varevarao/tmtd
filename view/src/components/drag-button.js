@@ -2,18 +2,18 @@ import { Button } from "@material-ui/core"
 import React, { useState } from 'react'
 import Draggable from "react-draggable"
 
-const DragButton = ({ onClick, children }) => {
+const DragButton = ({ onClick, className, children, ...rest }) => {
     const [disabled, setDisabled] = useState(false);
 
     return (
         <Draggable
-            bounds='body'
             onDrag={() => setDisabled(true)}
             onStop={() => setDisabled(false)}
+            {...rest}
         >
             <Button
                 disabled={disabled}
-                className="create-button"
+                className={className}
                 onClick={onClick}
             >
                 {children}

@@ -9,32 +9,36 @@ $width-header-md: 20vw;
     border: none;
     border-radius: 2px;
     box-shadow: 2px 2px 5px darkgray;
-    
+
     padding: 1rem;
     padding-left: 2rem;
 
     height: $height-header;
     width: $width-header;
 
-    // Overrides
+    // Larger width on larger screens
     @include from('md') {
         width: $width-header-md;
     }
 
-    position: fixed;
-    top: 0;
+    // Make the header fixed position, 
+    // and toggle-able on smaller screens
+    @include until('sm') {
+        position: fixed;
+        top: 0;
 
-    // width - padding-left - padding-right
-    left: calc((-1 * #{$width-header}) - 2rem - 1rem);
-    transition: left .1s linear;
+        // width - padding-left - padding-right
+        left: calc((-1 * #{$width-header}) - 2rem - 1rem);
+        transition: left .1s linear;
 
-    // width - padding-left
-    &.ready {
-        left: calc((-1 * #{$width-header}) - 2rem);
-    }
+        // width - padding-left
+        &.ready {
+            left: calc((-1 * #{$width-header}) - 2rem);
+        }
 
-    &.active {
-        left: 0px;
+        &.active {
+            left: 0px;
+        }
     }
 
     display: flex;

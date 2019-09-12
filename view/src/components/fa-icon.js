@@ -1,5 +1,5 @@
 import { faWindowClose } from '@fortawesome/free-regular-svg-icons';
-import { faMinus, faPlus, faSignInAlt, faSignOutAlt, faSpinner, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus, faSignInAlt, faSignOutAlt, faSpinner, faUserPlus, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from 'react';
 
@@ -10,7 +10,9 @@ export const ICON_MAP = {
     'plus': faPlus,
     'minus': faMinus,
     'close': faWindowClose,
-    'spinner': faSpinner
+    'spinner': faSpinner,
+    'up-solid': faSortUp,
+    'down-solid': faSortDown
 }
 
 const FAIcon = ({ icon, ...rest }) => (

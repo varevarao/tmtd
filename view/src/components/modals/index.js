@@ -2,14 +2,15 @@ import { faWindowClose } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Card, CardActions, CardContent, FormControl, FormGroup, FormLabel, Grid, Modal, OutlinedInput, TextareaAutosize } from '@material-ui/core';
 import React, { Component } from 'react';
-import '../styles/components/product-modal.scss';
+import { connect } from 'react-redux';
+import '../../styles/components/modals.scss';
 
 export const PRODUCT_MODAL_TYPE = {
     DETAILS: 'DETAILS',
     NEW: 'NEW'
 }
 
-export default class AppModal extends Component {
+class AppModal extends Component {
     constructor(props) {
         super(props);
 
@@ -144,3 +145,5 @@ const mapStateToProps = ({ ui }) => ({
 const mapDispatchToProps = dispatch => ({
 
 })
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppModal);
