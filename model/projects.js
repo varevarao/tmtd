@@ -71,13 +71,13 @@ module.exports = {
     },
 
     fetchByTitle: (userId, title) => {
-        return db.manyOrNone({
+        return db.oneOrNone({
             text: `
                 SELECT * FROM projects WHERE user_id = $1 AND title = $2
             `,
             values: [userId, title]
         }).catch(err => {
-            console.error('Error by title for user', err);
+            console.error('Error by title for project', err);
             return null;
         })
     },
@@ -93,7 +93,7 @@ module.exports = {
                     created_at,
                     group_id,
                     tags,
-                    notes,
+                    notes
                 )
                 VALUES (
                     $1, $2, $3, $4, NOW(), $5, $6, $7

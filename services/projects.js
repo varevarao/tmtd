@@ -30,7 +30,9 @@ const populateModel = async existing => {
 
 module.exports = {
     exists: async (userId, title) => {
+        console.log('Checking exist', userId, title);
         const existing = await projects.fetchByTitle(userId, title);
+        console.log(existing);
         return !!existing;
     },
 

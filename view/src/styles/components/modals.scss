@@ -10,39 +10,50 @@
         outline: none;
         display: inline-block;
 
-        .create-project {
-            @include from('md') {
-                width: 40vw;
-            }
-        }
-
         .modal-card {
-            background-color: green;
+            background-color: white;
 
-            .form-actions {
-                justify-content: flex-end;
+            @include from('md') {
+                width: 50vw;
+            }
+            max-height: 100vh;
 
-                button {
-                    flex: 0.4;
-                    color: white;
-                    font-weight: 900;
-                }
+            display: flex;
+            flex-direction: column;
+
+            >:nth-child(1) {
+                flex: 4;
+            }
+
+            >:nth-child(2) {
+                flex: 1;
             }
 
             .form-header {
                 display: flex;
                 justify-content: space-between;
-                align-items: flex-start;
+                align-items: center;
 
                 .form-title {
                     font-family: 'Open Sans', sans-serif;
                     text-align: center;
-                    color: white;
-                    font-size: 1.5rem;
+                    color: darkgray;
+                    font-size: 1rem;
                     font-weight: 900;
+
+                    span {
+                        color: darkorange;
+                    }
                 }
 
-                svg {
+                .header-icon {
+                    text-align: right;
+                    cursor: default;
+                    color: darkorange;
+                    margin-right: 5px;
+                }
+
+                .header-close {
                     text-align: right;
                     cursor: pointer;
                     color: white;
@@ -51,57 +62,81 @@
                 }
             }
 
-            .project-form {
+            .modal-content {
                 margin-top: 2rem;
+                border: 1px dashed darkorange;
+                border-radius: 5px;
+                padding: 0.5rem;
+                height: calc(100% - 2rem);
+                overflow-y: scroll;
+            }
 
+            .project-form {
                 >div {
-                    margin-top: 2rem;
-
-                    input {
-                        font-size: 1rem;
-                        line-height: 1rem;
-                        box-sizing: border-box;
-                        // padding: 1.2rem;
-                        background-color: white;
-                        border-radius: 5px;
-                    }
-
-                    label {
-                        color: white;
-                        margin-bottom: 1rem;
-                    }
-                }
-
-                .part-1 {
-                    display: flex;
-                    justify-content: space-between;
-
-                    .product-name {
-                        flex: 4;
-                        margin-right: 10%;
-                    }
-
-                    .product-qty {
-                        flex: 1;
-                    }
-                }
-
-                .multiline {
-                    font-size: 1rem;
-                    line-height: 1.2rem;
-                    padding: 0.6rem 1.2rem;
-
-                    border: lightgray 1px solid;
-                    border-radius: 5px;
-                }
-
-                button {
-                    margin-top: 2rem;
-                    background-color: whitesmoke;
-                    color: green;
-                    font-weight: 900;
                     flex: 1;
+
+                    padding: 5px;
                 }
+
+                .group,
+                .notes {
+                    width: 100%;
+                }
+
+                summary {
+                    outline: none;
+                    color: darkgray;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                input {
+                    font-size: 1rem;
+                    line-height: 1rem;
+                    box-sizing: border-box;
+                    // padding: 1.2rem;
+                    background-color: white;
+                    border-radius: 5px;
+
+                    &:focus {
+                        outline: darkorange;
+                    }
+                }
+
+                // .multiline {
+                //     font-size: 1rem;
+                //     line-height: 1.2rem;
+                //     padding: 0.6rem 1.2rem;
+
+                //     border: lightgray 1px solid;
+                //     border-radius: 5px;
+                // }
+            }
+
+            .form-actions {
+                justify-content: flex-end;
+
+                >button {
+                    font-weight: 900;
+                }
+
+                >:nth-child(1) {
+                    color: white;
+                    background-color: darkorange;
+                }
+
+                >:nth-child(2) {
+                    color: darkgray;
+                    background-color: transparent;
+                }
+            }
+
+            .error {
+                text-align: center;
+                color: firebrick;
+                font-size: 0.875rem;
             }
         }
     }

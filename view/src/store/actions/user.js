@@ -1,6 +1,7 @@
 import { user as actionTypes } from './actionTypes';
 import AuthenticationService from '../../services/authentication-service';
 import DataService from '../../services/data-service';
+import { showLoader, hideLoader } from './ui';
 
 export const authenticated = bool => ({
     type: actionTypes.AUTH,
@@ -87,6 +88,11 @@ export const addProject = ({ id, title, tags, notes }) => ({
         project: { id, title, tags, notes }
     }
 })
+
+export const createProject = ({ title, group, tags, notes }) => async dispatch => {
+    const project = await DataService.postNewProject({ title, group, notes, tags });
+    dispatch(addProject(project));
+}
 
 export const updateProject = ({ id, name, tags, notes }) => ({
     type: actionTypes.UPDATE_PROJECT,

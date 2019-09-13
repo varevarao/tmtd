@@ -40,7 +40,7 @@ class _DataService {
     }
 
     _dataRequest(path, options) {
-        return AuthenticationService.fetch(`${this.domain}/${path}`, options)
+        return AuthenticationService.fetch(`${this.domain}/${path}`, options).catch(err => AuthenticationService._handleError(err));
     }
 }
 
