@@ -1,5 +1,8 @@
 const models = [
     require('./users'),
+    require('./groups'),
+    require('./projects'),
+    require('./bills')
 ]
 
 module.exports = {

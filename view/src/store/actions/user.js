@@ -7,9 +7,20 @@ export const authenticated = bool => ({
     payload: bool
 })
 
-export const setProfile = (profile, meta) => ({
+export const setProfile = ({ email, firstName, lastName, projects, groups, ...meta }) => ({
     type: actionTypes.LOGIN,
-    payload: { profile, meta }
+    payload: {
+        profile: { email, firstName, lastName },
+        meta: meta || {},
+        projects: projects ? projects.reduce((acc, curr) => {
+            acc[curr.name] = curr;
+            return acc;
+        }, {}) : {},
+        groups: groups ? groups.reduce((acc, curr) => {
+            acc[curr.name] = curr;
+            return acc;
+        }, {}) : {}
+    }
 });
 
 export const login = ({ email, password }) => async dispatch => {
@@ -47,6 +58,48 @@ export const deleteMeta = key => ({
     type: actionTypes.DELETE_META,
     payload: { key }
 });
+
+export const addGroup = ({ id, name, tags, notes }) => ({
+    type: actionTypes.ADD_GROUP,
+    payload: {
+        id,
+        group: { id, name, tags, notes }
+    }
+})
+
+export const updateGroup = ({ id, name, tags, notes }) => ({
+    type: actionTypes.UPDATE_GROUP,
+    payload: {
+        id,
+        group: { id, name, tags, notes }
+    }
+})
+
+export const deleteGroup = id => ({
+    type: actionTypes.DELETE_GROUP,
+    payload: { id }
+})
+
+export const addProject = ({ id, title, tags, notes }) => ({
+    type: actionTypes.ADD_PROJECT,
+    payload: {
+        id,
+        project: { id, title, tags, notes }
+    }
+})
+
+export const updateProject = ({ id, name, tags, notes }) => ({
+    type: actionTypes.UPDATE_PROJECT,
+    payload: {
+        id,
+        project: { id, name, tags, notes }
+    }
+})
+
+export const deleteProject = id => ({
+    type: actionTypes.DELETE_PROJECT,
+    payload: { id }
+})
 
 export const fetchUserProfile = () => async dispatch => {
     const profile = await DataService.getUserProfile();

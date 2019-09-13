@@ -25,7 +25,7 @@ export class CreateProject extends Component {
     }
 
     handleInputChange(evt) {
-
+        
     }
 
     handleSubmit() {
@@ -56,7 +56,7 @@ export class CreateProject extends Component {
                             </FormControl>
                             <FormControl className="group">
                                 <FormLabel>Group</FormLabel>
-                                <OutlinedInput type="number"
+                                <OutlinedInput type="text"
                                     name="group"
                                     placeholder="Assign to a group"
                                     value={group}

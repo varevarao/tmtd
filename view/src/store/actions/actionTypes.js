@@ -22,5 +22,17 @@ export const user = {
     LOGOUT: 'USER:LOGOUT',
     
     SET_META: 'USER:SET_META',
-    DELETE_META: 'USER:DELETE_META'
+    DELETE_META: 'USER:DELETE_META',
+
+    ADD_GROUP: 'USER:ADD_GROUP',
+    DELTE_GROUP: 'USER:DELETE_GROUP',
+    UPDATE_GROUP: 'USER:UPDATE_GROUP'
+}
+
+export const project = {
+    FETCH: 'FETCH',
+    FETCHED: 'FETCHED',
+    CREATE: 'CREATE',
+    UPDATE: 'UPDATE',
+    DELETE: 'DELETE'
 }

@@ -3,7 +3,8 @@ import { user as actionTypes } from '../actions/actionTypes';
 const initialState = {
     authenticated: false,
     profile: null,
-    meta: {}
+    meta: {},
+    groups: {}
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -17,7 +18,8 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 profile: payload.profile,
-                meta: payload.meta || {}
+                meta: payload.meta || {},
+                groups: payload.groups || {}
             }
         case actionTypes.LOGOUT:
             return {

@@ -1,6 +1,4 @@
 const users = require('../model/users');
-const groups = require('../model/groups');
-const projects = require('../services/projects');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -66,16 +64,12 @@ module.exports = {
 
         if (!!existing) {
             const { email, firstName, lastName } = mapUserModel(existing);
-            const userGroups = await groups.fetchForUser(id);
-            const userProjects = await projects.getAll(id);
 
             const profile = {
                 id,
                 email,
                 firstName,
-                lastName,
-                groups: userGroups,
-                projects: userProjects
+                lastName
             }
 
             return profile;
