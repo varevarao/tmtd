@@ -3,6 +3,7 @@ const groups = require('../model/groups');
 const bills = require('../model/bills');
 
 const mapProjectModel = ({
+    id,
     title,
     user_id: userId,
     clients,
@@ -12,7 +13,7 @@ const mapProjectModel = ({
     tags,
     notes,
 }, group) => ({
-    title, userId, clients, createdAt, status, groupId, group, tags, notes
+    id, title, userId, clients, createdAt, status, groupId, group, tags, notes
 });
 
 const populateModel = async existing => {
@@ -68,7 +69,7 @@ module.exports = {
         }
     },
 
-    getAll: async ({ userId }) => {
+    getAll: async (userId) => {
         const existing = await projects.fetchForUser(userId);
 
         if (!!existing) {

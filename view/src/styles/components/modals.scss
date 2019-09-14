@@ -16,17 +16,16 @@
             @include from('md') {
                 width: 50vw;
             }
+
             max-height: 100vh;
 
             display: flex;
             flex-direction: column;
 
             >:nth-child(1) {
-                flex: 4;
-            }
-
-            >:nth-child(2) {
-                flex: 1;
+                display: flex;
+                flex-direction: column;
+                max-height: 75vh;
             }
 
             .form-header {
@@ -59,10 +58,12 @@
                     color: white;
                     border: none;
                     background-color: firebrick;
+                    display: flex;
                 }
             }
 
             .modal-content {
+                background-color: whitesmoke;
                 margin-top: 2rem;
                 border: 1px dashed darkorange;
                 border-radius: 5px;
@@ -83,12 +84,37 @@
                     width: 100%;
                 }
 
-                summary {
-                    outline: none;
-                    color: darkgray;
+                label, summary {
+                    color: darkorange;
+                    font-weight: 500;
+                    letter-spacing: 2px;
+                    padding-bottom: 5px;
+                }
 
-                    &:focus {
+                label {
+                    &::after {
+                        content: ':';
+                    }
+                }
+
+                details {
+                    width: 100%;
+                    summary {
                         outline: none;
+                        color: darkgray;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    &[open] {
+                        summary {
+                            color: darkorange;
+                            &::after {
+                                content: ':';
+                            }
+                        }
                     }
                 }
 
@@ -96,7 +122,6 @@
                     font-size: 1rem;
                     line-height: 1rem;
                     box-sizing: border-box;
-                    // padding: 1.2rem;
                     background-color: white;
                     border-radius: 5px;
 
@@ -105,14 +130,14 @@
                     }
                 }
 
-                // .multiline {
-                //     font-size: 1rem;
-                //     line-height: 1.2rem;
-                //     padding: 0.6rem 1.2rem;
-
-                //     border: lightgray 1px solid;
-                //     border-radius: 5px;
-                // }
+                textarea {
+                    padding: 0.5rem;
+                    resize: vertical;
+                    font-size: 0.875rem;
+                    line-height: 1rem;
+                    border-radius: 5px;
+                    border-color: lightgray;
+                }
             }
 
             .form-actions {

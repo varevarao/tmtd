@@ -4,7 +4,8 @@ const initialState = {
     authenticated: false,
     profile: null,
     meta: {},
-    groups: {}
+    groups: {},
+    projects: {}
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -19,7 +20,8 @@ export default (state = initialState, { type, payload }) => {
                 ...state,
                 profile: payload.profile,
                 meta: payload.meta || {},
-                groups: payload.groups || {}
+                groups: payload.groups || {},
+                projects: payload.projects || {}
             }
         case actionTypes.LOGOUT:
             return {
@@ -39,6 +41,19 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 meta: newMeta
+            }
+        case actionTypes.ADD_PROJECT:
+        case actionTypes.UPDATE_PROJECT:
+            return {
+                ...state,
+                projects: { ...state.projects, [payload.project.id]: payload.project }
+            }
+        case actionTypes.DELETE_PROJECT:
+            const afterRemove = { ...state.projects };
+            delete afterRemove[payload.id];
+            return {
+                ...state,
+                projects: afterRemove
             }
         default:
             return state

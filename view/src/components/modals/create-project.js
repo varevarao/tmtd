@@ -62,7 +62,7 @@ export class CreateProject extends Component {
                     <div className="modal-content">
                         <FormGroup className="project-form">
                             <FormControl className="name">
-                                <FormLabel>Title</FormLabel>
+                                <FormLabel>* Title</FormLabel>
                                 <OutlinedInput className="input-text" type="text"
                                     name="title"
                                     placeholder="A cool title"
@@ -87,7 +87,8 @@ export class CreateProject extends Component {
                                 <details open={!!notes}>
                                     <summary>Notes</summary>
                                     <FormControl className="notes">
-                                        <TextareaAutosize className="multiline" rows={5}
+                                        <TextareaAutosize className="multiline" 
+                                            rows={5}
                                             name="notes"
                                             placeholder="Notes.."
                                             value={notes}

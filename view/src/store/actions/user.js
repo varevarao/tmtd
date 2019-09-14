@@ -1,7 +1,6 @@
-import { user as actionTypes } from './actionTypes';
 import AuthenticationService from '../../services/authentication-service';
 import DataService from '../../services/data-service';
-import { showLoader, hideLoader } from './ui';
+import { user as actionTypes } from './actionTypes';
 
 export const authenticated = bool => ({
     type: actionTypes.AUTH,
@@ -14,7 +13,7 @@ export const setProfile = ({ email, firstName, lastName, projects, groups, ...me
         profile: { email, firstName, lastName },
         meta: meta || {},
         projects: projects ? projects.reduce((acc, curr) => {
-            acc[curr.name] = curr;
+            acc[curr.title] = curr;
             return acc;
         }, {}) : {},
         groups: groups ? groups.reduce((acc, curr) => {
@@ -81,7 +80,7 @@ export const deleteGroup = id => ({
     payload: { id }
 })
 
-export const addProject = ({ id, title, tags, notes }) => ({
+export const localCreateProject = ({ id, title, tags, notes }) => ({
     type: actionTypes.ADD_PROJECT,
     payload: {
         id,
@@ -91,10 +90,10 @@ export const addProject = ({ id, title, tags, notes }) => ({
 
 export const createProject = ({ title, group, tags, notes }) => async dispatch => {
     const project = await DataService.postNewProject({ title, group, notes, tags });
-    dispatch(addProject(project));
+    dispatch(localCreateProject(project));
 }
 
-export const updateProject = ({ id, name, tags, notes }) => ({
+export const localUpdateProject = ({ id, name, tags, notes }) => ({
     type: actionTypes.UPDATE_PROJECT,
     payload: {
         id,
@@ -102,10 +101,20 @@ export const updateProject = ({ id, name, tags, notes }) => ({
     }
 })
 
-export const deleteProject = id => ({
+export const updateProject = ({ id, title, group, tags, notes }) => async dispatch => {
+    const project = await DataService.updateProject({ id, title, group, notes, tags });
+    dispatch(localUpdateProject(project));
+}
+
+export const localDeleteProject = id => ({
     type: actionTypes.DELETE_PROJECT,
     payload: { id }
 })
+
+export const deleteProject = id => async dispatch => {
+    // const project = await DataService.({ id, title, group, notes, tags });
+    // dispatch(localUpdateProject(project));
+}
 
 export const fetchUserProfile = () => async dispatch => {
     const profile = await DataService.getUserProfile();

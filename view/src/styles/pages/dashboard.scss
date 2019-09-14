@@ -78,5 +78,14 @@
         &:active {
             background-color: antiquewhite;
         }
+
+        color: dimgray;
+
+        >:nth-child(1) {
+            min-width: 1rem;
+            margin-right: 1rem;
+            justify-content: center;
+            color: rgba(darkorange, 0.9);
+        }
     }
 }
